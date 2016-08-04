@@ -1,0 +1,37 @@
+{
+  "title": "About RSS Plugin",
+  "story": [
+  {
+    "type": "paragraph",
+    "id": "5f20ac375b464bfd",
+    "text": "Here we describe the purpose of the plugin and include a sample."
+  },
+  {
+    "type": "rss",
+    "id": "2e307e48c4bd311a",
+    "text": "This is text in the new plugin. You can *double-click* to edit it too."
+  }
+],
+  "journal": [
+  {
+    "type": "create",
+    "item": {
+      "title": "About RSS Plugin",
+      "story": [
+  {
+    "type": "paragraph",
+    "id": "5f20ac375b464bfd",
+    "text": "Here we describe the purpose of the plugin and include a sample."
+  },
+  {
+    "type": "rss",
+    "id": "2e307e48c4bd311a",
+    "text": "This is text in the new plugin. You can *double-click* to edit it too."
+  }
+]
+    },
+    "date": 1470326071000,
+    "certificate": "from mkplugin.sh"
+  }
+]
+}
