@@ -1,6 +1,6 @@
 {
   "name": "wiki-plugin-rss",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Federated Wiki - RSS Plugin",
   "keywords": [
     "rss",
@@ -9,9 +9,9 @@
     "plugin"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "you@example.com",
-    "url": "http://example.com"
+    "name": "Ward Cunningham",
+    "email": "ward@c2.com",
+    "url": "http://ward.asia.wiki.org"
   },
   "contributors": [],
   "scripts": {
@@ -28,10 +28,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fedwiki/wiki-plugin-rss.git"
+    "url": "https://github.com/wardcunningham/wiki-plugin-rss.git"
   },
   "bugs": {
-    "url": "https://github.com/fedwiki/wiki-plugin-rss/issues"
+    "url": "https://github.com/wardcunningham/wiki-plugin-rss/issues"
   },
   "engines": {
     "node": ">0.10"
