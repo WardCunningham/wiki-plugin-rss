@@ -8,7 +8,8 @@ expand = (text)->
 
 emit = ($item, item) ->
   $item.append """
-    <p style="background-color:#eee;padding:15px;">
+    <p style="background-color:#eee; padding:15px; display:table-cell; vertical-align: middle;">
+    <img src=/plugins/rss/rss.png height=24>
       #{expand item.text}
     </p>
   """
