@@ -1,6 +1,6 @@
 {
   "name": "wiki-plugin-rss",
-  "version": "0.1.1",
+  "version": "0.1.5",
   "description": "Federated Wiki - RSS Plugin",
   "keywords": [
     "rss",
@@ -11,7 +11,7 @@
   "author": {
     "name": "Ward Cunningham",
     "email": "ward@c2.com",
-    "url": "http://ward.asia.wiki.org"
+    "url": "http://ward.bay.wiki.org"
   },
   "contributors": [],
   "scripts": {

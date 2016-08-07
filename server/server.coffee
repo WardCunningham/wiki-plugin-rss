@@ -11,6 +11,16 @@ escape = (text)->
     .replace /</g, '&lt;'
     .replace />/g, '&gt;'
 
+publishing = (sitemap, story, index) ->
+  map = {}
+  map[s.slug] = s for s in sitemap
+  selected = []
+  for item in story[(index+1)..]
+    if item.text && (m = item.text.match /\[\[(.*?)\]\]/)
+      if siteref = map[link = asSlug(m[1])]
+        selected.push {item, link, siteref}
+  selected
+
 startServer = (params) ->
   app = params.app
 
@@ -44,26 +54,29 @@ startServer = (params) ->
     app.pagehandler.get slug, (e, page, status) ->
       return res.e e if e
 
+      plugin = page.story?.findIndex (item) ->
+        item.type == 'rss'
+      return res.status(404).send("Not an RSS feed.") unless plugin >= 0
+
       sitemapLoc = path.join(params.argv.status, 'sitemap.json')
-      fs.readFile sitemapLoc, 'utf8', (e, data) ->
+      fs.readFile sitemapLoc, 'utf8', (e, sitemap) ->
         return res.e e if e
-        sitemap = {}
-        sitemap[s.slug] = s for s in JSON.parse data
+
+        pubs = publishing JSON.parse(sitemap), page.story, plugin
 
         rss {}, ->
           channel {}, ->
             set 'title', page.title || slug
-            set 'link', "http://#{req.hostname}/#{req.params.slug}.html"
+            set 'link', "http://#{params.argv.url}/#{req.params.slug}.html"
             set 'lastBuildDate', new Date(page.journal[page.journal.length-1].date || Date.now())
-            set 'description', page.story?[0]?.text || 'unknown description'
-            for item in page.story || []
-              if item.text && (m = item.text.match /\[\[(.*?)\]\]/)
-                if s = sitemap[link = asSlug(m[1])]
-                  elem 'item', {}, {}, ->
-                    set 'title', escape item.text
-                    set 'link', "#{params.argv.url}/#{link}/.html"
-                    set 'pubDate', new Date(s.date)
-                    set 'description', escape s.synopsis
+            set 'description', escape page.story?[0]?.text || 'unknown description'
+            set 'image', "#{params.argv.url}/favicon.png"
+            for pub in pubs
+              elem 'item', {}, {}, ->
+                set 'title', escape pub.item.text
+                set 'link', "#{params.argv.url}/#{pub.link}.html"
+                set 'pubDate', new Date(pub.siteref.date)
+                set 'description', escape pub.siteref.synopsis
 
         res.set('Content-Type', 'application/xml')
         res.send markup.join("\n")
