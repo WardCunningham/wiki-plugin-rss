@@ -7,7 +7,6 @@ expand = (text)->
     .replace /&/g, '&amp;'
     .replace /</g, '&lt;'
     .replace />/g, '&gt;'
-    .replace /\*(.+?)\*/g, '<i>$1</i>'
 
 publishing = (sitemap, story) ->
   map = {}

@@ -8,6 +8,6 @@ describe 'rss plugin', ->
 
   describe 'expand', ->
 
-    it 'can make itallic', ->
-      result = rss.expand 'hello *world*'
-      expect(result).to.be 'hello <i>world</i>'
+    # it 'can make itallic', ->
+    #   result = rss.expand 'hello *world*'
+    #   expect(result).to.be 'hello <i>world</i>'
