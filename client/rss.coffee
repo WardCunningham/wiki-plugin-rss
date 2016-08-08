@@ -27,24 +27,40 @@ emit = ($item, item) ->
   site = $item.parents('.page').data('site') || location.host
   slug = asSlug page.title
 
-  report = ->
-    map = wiki.neighborhood[site].sitemap
-    return "waiting for sitemap" unless map
-    pubs = publishing map, page.story
-    "publishing #{pubs.length} of #{map.length} articles"
-
   $item.append """
     <div style="background-color:#eee; padding:8px;">
       <table>
         <tr>
-          <td><a href="/plugin/rss/#{slug}.xml" target="_blank"><img src=/plugins/rss/rss.png height=24></a>
-          <td class=report>#{report()}
+          <td>
+            <a href="//#{site}/plugin/rss/#{slug}.xml" target="_blank" style="padding-right:8px;">
+            <img src=/plugins/rss/rss.png height=24></a>
+          <td class=report>
+            waiting for sitemap
       </table>
     </div>
   """
 
 bind = ($item, item) ->
+
+  page = $item.parents('.page').data('data')
+  site = $item.parents('.page').data('site') || location.host
+
+  report = ->
+    if map = wiki.neighborhood[site].sitemap
+      pubs = publishing map, page.story
+      $item.find('.report').text "publishing #{pubs.length} of #{map.length} pages"
+
   $item.dblclick -> wiki.textEditor $item, item
+
+  report()
+  $item.get(0).refresh = () ->
+    report()
+
+if window?
+  $('body').on 'new-neighbor-done', (e, neighbor) ->
+    $('.rss').each (index, element) ->
+      element.refresh() if element.refresh
+
 
 window.plugins.rss = {emit, bind} if window?
 module.exports = {expand} if module?

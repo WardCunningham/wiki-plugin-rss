@@ -1,6 +1,6 @@
 {
   "name": "wiki-plugin-rss",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Federated Wiki - RSS Plugin",
   "keywords": [
     "rss",
