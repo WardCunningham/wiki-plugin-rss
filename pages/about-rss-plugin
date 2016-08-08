@@ -1,37 +1,393 @@
 {
   "title": "About RSS Plugin",
   "story": [
-  {
-    "type": "paragraph",
-    "id": "5f20ac375b464bfd",
-    "text": "Here we describe the purpose of the plugin and include a sample."
-  },
-  {
-    "type": "rss",
-    "id": "2e307e48c4bd311a",
-    "text": "This is text in the new plugin. You can *double-click* to edit it too."
-  }
-],
-  "journal": [
-  {
-    "type": "create",
-    "item": {
-      "title": "About RSS Plugin",
-      "story": [
-  {
-    "type": "paragraph",
-    "id": "5f20ac375b464bfd",
-    "text": "Here we describe the purpose of the plugin and include a sample."
-  },
-  {
-    "type": "rss",
-    "id": "2e307e48c4bd311a",
-    "text": "This is text in the new plugin. You can *double-click* to edit it too."
-  }
-]
+    {
+      "type": "paragraph",
+      "id": "5f20ac375b464bfd",
+      "text": "This plugin will expose a wiki page as an RSS feed with articles (other pages) drawn from suitable wiki links found on the same page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
     },
-    "date": 1470326071000,
-    "certificate": "from mkplugin.sh"
-  }
-]
+    {
+      "type": "rss",
+      "id": "2e307e48c4bd311a",
+      "text": "   "
+    },
+    {
+      "type": "paragraph",
+      "id": "13aa6d4ccbab4182",
+      "text": "Published articles follow. Each paragraph becomes a title, the linked pages, articles."
+    },
+    {
+      "type": "paragraph",
+      "id": "d06dbf12ee317c83",
+      "text": "[[Welcome Visitors]] explains wiki and much much more. Continue reading to learn its secrets."
+    },
+    {
+      "type": "pagefold",
+      "id": "ec8ab8951f059bf3",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "d34456a9c6fad56e",
+      "text": "The plugin is configured by the items that follow it on the page. The plugin reports how many of these are found suitable as articles in that they have an internal link to extant page in the same wiki."
+    },
+    {
+      "type": "paragraph",
+      "id": "084ac363ec0c19ec",
+      "text": "The plugin includes a server-side component which translates the page and content from its sitemap into the RSS XML format. [http://cyber.law.harvard.edu/rss/rss.html spec]"
+    },
+    {
+      "type": "paragraph",
+      "id": "20228b2f97548ae5",
+      "text": "Caution: RSS readers vary in how often they will reread partially created articles. Good practice defers adding articles to the feed before they are finished in wiki."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "About RSS Plugin",
+        "story": [
+          {
+            "type": "paragraph",
+            "id": "5f20ac375b464bfd",
+            "text": "Here we describe the purpose of the plugin and include a sample."
+          },
+          {
+            "type": "rss",
+            "id": "2e307e48c4bd311a",
+            "text": "This is text in the new plugin. You can *double-click* to edit it too."
+          }
+        ]
+      },
+      "date": 1470326071000,
+      "certificate": "from mkplugin.sh"
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose the wiki page that holds it as an RSS channel with RSS items drawn from suitable wiki items on the page."
+      },
+      "date": 1470625391914
+    },
+    {
+      "type": "edit",
+      "id": "2e307e48c4bd311a",
+      "item": {
+        "type": "rss",
+        "id": "2e307e48c4bd311a",
+        "text": "   "
+      },
+      "date": 1470625423302
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d34456a9c6fad56e"
+      },
+      "id": "d34456a9c6fad56e",
+      "type": "add",
+      "after": "2e307e48c4bd311a",
+      "date": 1470625537985
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that surround it on the page. The plugin reports how many of these are suitable, containing an internal link to an existing page who's synopsis "
+      },
+      "date": 1470625757754
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that surround it on the page. The plugin reports how many of these are found suitable in that they have internal links to extant pages in the same site."
+      },
+      "date": 1470625881520
+    },
+    {
+      "type": "add",
+      "id": "084ac363ec0c19ec",
+      "item": {
+        "type": "paragraph",
+        "id": "084ac363ec0c19ec",
+        "text": "The plugin includes a server-side component which translates the page and content from the site's sitemap into the RSS XML format."
+      },
+      "after": "d34456a9c6fad56e",
+      "date": 1470625946549
+    },
+    {
+      "type": "edit",
+      "id": "084ac363ec0c19ec",
+      "item": {
+        "type": "paragraph",
+        "id": "084ac363ec0c19ec",
+        "text": "The plugin includes a server-side component which translates the page and content from the site's sitemap into the RSS XML format. [http://cyber.law.harvard.edu/rss/rss.html site]"
+      },
+      "date": 1470625974841
+    },
+    {
+      "type": "add",
+      "id": "20228b2f97548ae5",
+      "item": {
+        "type": "paragraph",
+        "id": "20228b2f97548ae5",
+        "text": "Caution: RSS readers vary in how often they will reread a partially created "
+      },
+      "after": "084ac363ec0c19ec",
+      "date": 1470626106164
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that surround it on the page. The plugin reports how many of these are found suitable as articles in that they have internal links to extant pages in the same site."
+      },
+      "date": 1470626115992
+    },
+    {
+      "type": "edit",
+      "id": "20228b2f97548ae5",
+      "item": {
+        "type": "paragraph",
+        "id": "20228b2f97548ae5",
+        "text": "Caution: RSS readers vary in how often they will reread partially created articles. Good practice defers adding articles to the feed before they are finished."
+      },
+      "date": 1470626235368
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose the wiki page that holds it as an RSS channel (feed) with RSS items (articles) drawn from suitable wiki items on the page."
+      },
+      "date": 1470626278577
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that follow it on the page. The plugin reports how many of these are found suitable as articles in that they have internal links to extant pages in the same site."
+      },
+      "date": 1470626287812
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that follow it on the page. The plugin reports how many of these are found suitable as articles in that they have internal links to extant pages in the same wiki."
+      },
+      "date": 1470626309218
+    },
+    {
+      "type": "edit",
+      "id": "084ac363ec0c19ec",
+      "item": {
+        "type": "paragraph",
+        "id": "084ac363ec0c19ec",
+        "text": "The plugin includes a server-side component which translates the page and content from its sitemap into the RSS XML format. [http://cyber.law.harvard.edu/rss/rss.html spec]"
+      },
+      "date": 1470626358426
+    },
+    {
+      "type": "add",
+      "id": "d06dbf12ee317c83",
+      "item": {
+        "type": "paragraph",
+        "id": "d06dbf12ee317c83",
+        "text": "[[Welcome Visitors]] explains wiki and much much more."
+      },
+      "after": "5f20ac375b464bfd",
+      "date": 1470626587581
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f20ac375b464bfd",
+        "2e307e48c4bd311a",
+        "d06dbf12ee317c83",
+        "d34456a9c6fad56e",
+        "084ac363ec0c19ec",
+        "20228b2f97548ae5"
+      ],
+      "id": "d06dbf12ee317c83",
+      "date": 1470626592081
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "ec8ab8951f059bf3"
+      },
+      "id": "ec8ab8951f059bf3",
+      "type": "add",
+      "after": "20228b2f97548ae5",
+      "date": 1470626612141
+    },
+    {
+      "type": "edit",
+      "id": "ec8ab8951f059bf3",
+      "item": {
+        "type": "pagefold",
+        "id": "ec8ab8951f059bf3",
+        "text": "."
+      },
+      "date": 1470626616044
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f20ac375b464bfd",
+        "2e307e48c4bd311a",
+        "d06dbf12ee317c83",
+        "ec8ab8951f059bf3",
+        "d34456a9c6fad56e",
+        "084ac363ec0c19ec",
+        "20228b2f97548ae5"
+      ],
+      "id": "ec8ab8951f059bf3",
+      "date": 1470626619723
+    },
+    {
+      "type": "edit",
+      "id": "d06dbf12ee317c83",
+      "item": {
+        "type": "paragraph",
+        "id": "d06dbf12ee317c83",
+        "text": "[[Welcome Visitors]] explains wiki and much much more. Continue reading to learn its secrets."
+      },
+      "date": 1470626689152
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose the wiki page that holds it as an RSS channel (feed) with RSS items (articles) drawn from suitable wiki items on the page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
+      },
+      "date": 1470626760952
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose a wiki page that holds it as an RSS channel (feed) with RSS items (articles) drawn from suitable wiki links on the page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
+      },
+      "date": 1470626887505
+    },
+    {
+      "type": "edit",
+      "id": "d34456a9c6fad56e",
+      "item": {
+        "type": "paragraph",
+        "id": "d34456a9c6fad56e",
+        "text": "The plugin is configured by the items that follow it on the page. The plugin reports how many of these are found suitable as articles in that they have an internal link to extant page in the same wiki."
+      },
+      "date": 1470626928266
+    },
+    {
+      "type": "edit",
+      "id": "20228b2f97548ae5",
+      "item": {
+        "type": "paragraph",
+        "id": "20228b2f97548ae5",
+        "text": "Caution: RSS readers vary in how often they will reread partially created articles. Good practice defers adding articles to the feed before they are finished in wiki."
+      },
+      "date": 1470626962635
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose a wiki page as an RSS feed (channel) with articlesitems () drawn from suitable wiki links on the page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
+      },
+      "date": 1470627106906
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose a wiki page as an RSS feed with articles (pages) drawn from suitable wiki links found on the same page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
+      },
+      "date": 1470627189464
+    },
+    {
+      "type": "edit",
+      "id": "5f20ac375b464bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "5f20ac375b464bfd",
+        "text": "This plugin will expose a wiki page as an RSS feed with articles (other pages) drawn from suitable wiki links found on the same page. [https://github.com/WardCunningham/wiki-plugin-rss github]"
+      },
+      "date": 1470627208926
+    },
+    {
+      "type": "add",
+      "id": "13aa6d4ccbab4182",
+      "item": {
+        "type": "paragraph",
+        "id": "13aa6d4ccbab4182",
+        "text": "Articles to be published follow."
+      },
+      "after": "d06dbf12ee317c83",
+      "date": 1470627289761
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f20ac375b464bfd",
+        "2e307e48c4bd311a",
+        "13aa6d4ccbab4182",
+        "d06dbf12ee317c83",
+        "ec8ab8951f059bf3",
+        "d34456a9c6fad56e",
+        "084ac363ec0c19ec",
+        "20228b2f97548ae5"
+      ],
+      "id": "13aa6d4ccbab4182",
+      "date": 1470627293178
+    },
+    {
+      "type": "edit",
+      "id": "13aa6d4ccbab4182",
+      "item": {
+        "type": "paragraph",
+        "id": "13aa6d4ccbab4182",
+        "text": "Articles to be published follow. We offer one as a sample."
+      },
+      "date": 1470627324183
+    },
+    {
+      "type": "edit",
+      "id": "13aa6d4ccbab4182",
+      "item": {
+        "type": "paragraph",
+        "id": "13aa6d4ccbab4182",
+        "text": "Published articles follow. Each paragraph becomes a title, the linked pages, articles."
+      },
+      "date": 1470627596396
+    }
+  ]
 }
