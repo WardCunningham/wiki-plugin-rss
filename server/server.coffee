@@ -73,20 +73,14 @@ startServer = (params) ->
     slug = req.params.slug
     markup = []
 
-    elem = (tag, params, extra, more) ->
-      markup.push "<#{tag} #{attr params} #{attr extra}>"; more(); markup.push "</#{tag}>"
+    elem = (tag, params, more) ->
+      markup.push "<#{tag} #{attr params}>"; more(); markup.push "</#{tag}>"
 
     attr = (params) ->
       ("#{k}=\"#{v}\"" for k, v of params).join " "
 
     set = (tag, value) ->
       markup.push "<#{tag}>#{escape "#{value}"}</#{tag}>"
-
-    rss = (params, more) ->
-      elem 'rss', params, {version: '2.0'}, more
-
-    channel = (params, more)->
-      elem 'channel', params, {}, more
 
     app.pagehandler.get slug, (e, page, status) ->
       return res.e e if e
@@ -103,20 +97,20 @@ startServer = (params) ->
         origin = params.argv.url
         slug = req.params.slug
 
-        rss {}, ->
-          channel {}, ->
+        elem 'rss', {version: '2.0'}, ->
+          elem 'channel', {}, ->
             set 'title', page.title || slug
             set 'link', "http://#{origin}/#{slug}.html"
             set 'lastBuildDate', new Date(page.journal[page.journal.length-1].date || Date.now())
             set 'description', expandLinks(origin, page.story?[0]?.text || 'unknown description')
-            elem 'image', {}, {}, ->
+            elem 'image', {}, ->
               set 'url', "#{params.argv.url}/favicon.png"
               set 'title', page.title || slug
               set 'link', "http://#{origin}/#{slug}.html"
               set 'width', 32
               set 'height', 32
             for pub in pubs
-              elem 'item', {}, {}, ->
+              elem 'item', {}, ->
                 set 'title', ignoreLinks pub.item.text
                 set 'link', "#{origin}/#{pub.link}.html"
                 set 'pubDate', new Date(pub.siteref.date)
