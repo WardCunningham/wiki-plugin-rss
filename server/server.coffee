@@ -11,6 +11,43 @@ escape = (text)->
     .replace /</g, '&lt;'
     .replace />/g, '&gt;'
 
+expandLinks = (origin, string) ->
+  stashed = []
+
+  stash = (text) ->
+    here = stashed.length
+    stashed.push text
+    "〖#{here}〗"
+
+  unstash = (match, digits) ->
+    stashed[+digits]
+
+  internal = (match, name) ->
+    slug = asSlug name
+    stash """<a href="#{origin}/#{slug}.html">#{escape name}</a>"""
+
+  external = (match, href, protocol, rest) ->
+    stash """<a href="#{href}" #{escape rest} </a>"""
+
+  string = string
+    .replace /〖(\d+)〗/g, "〖 $1 〗"
+    .replace /\[\[([^\]]+)\]\]/gi, internal
+    .replace /\[((http|https|ftp):.*?) (.*?)\]/gi, external
+  escape string
+    .replace /〖(\d+)〗/g, unstash
+
+ignoreLinks = (string) ->
+  internal = (match, name) ->
+    name
+
+  external = (match, href, protocol, rest) ->
+    rest
+
+  string = string
+    .replace /\[\[([^\]]+)\]\]/gi, internal
+    .replace /\[((http|https|ftp):.*?) (.*?)\]/gi, external
+  escape string
+
 publishing = (sitemap, story, index) ->
   map = {}
   map[s.slug] = s for s in sitemap
@@ -43,7 +80,7 @@ startServer = (params) ->
       ("#{k}=\"#{v}\"" for k, v of params).join " "
 
     set = (tag, value) ->
-      markup.push "<#{tag}>#{value}</#{tag}>"
+      markup.push "<#{tag}>#{escape "#{value}"}</#{tag}>"
 
     rss = (params, more) ->
       elem 'rss', params, {version: '2.0'}, more
@@ -63,20 +100,27 @@ startServer = (params) ->
         return res.e e if e
 
         pubs = publishing JSON.parse(sitemap), page.story, plugin
+        origin = params.argv.url
+        slug = req.params.slug
 
         rss {}, ->
           channel {}, ->
             set 'title', page.title || slug
-            set 'link', "http://#{params.argv.url}/#{req.params.slug}.html"
+            set 'link', "http://#{origin}/#{slug}.html"
             set 'lastBuildDate', new Date(page.journal[page.journal.length-1].date || Date.now())
-            set 'description', escape page.story?[0]?.text || 'unknown description'
-            set 'image', "#{params.argv.url}/favicon.png"
+            set 'description', expandLinks(origin, page.story?[0]?.text || 'unknown description')
+            elem 'image', {}, {}, ->
+              set 'url', "#{params.argv.url}/favicon.png"
+              set 'title', page.title || slug
+              set 'link', "http://#{origin}/#{slug}.html"
+              set 'width', 32
+              set 'height', 32
             for pub in pubs
               elem 'item', {}, {}, ->
-                set 'title', escape pub.item.text
-                set 'link', "#{params.argv.url}/#{pub.link}.html"
+                set 'title', ignoreLinks pub.item.text
+                set 'link', "#{origin}/#{pub.link}.html"
                 set 'pubDate', new Date(pub.siteref.date)
-                set 'description', escape pub.siteref.synopsis
+                set 'description', expandLinks(origin, pub.siteref.synopsis)
 
         res.set('Content-Type', 'application/xml')
         res.send markup.join("\n")
