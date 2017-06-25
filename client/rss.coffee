@@ -45,7 +45,7 @@ bind = ($item, item) ->
   site = $item.parents('.page').data('site') || location.host
 
   report = ->
-    if map = wiki.neighborhood[site].sitemap
+    if map = wiki.neighborhood[site]?.sitemap
       pubs = publishing map, page.story
       $item.find('.report').text "publishing #{pubs.length} of #{map.length} pages"
 
