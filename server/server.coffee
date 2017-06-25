@@ -1,6 +1,8 @@
 fs = require 'fs'
 path = require 'path'
 
+id = ->
+  Math.floor(Math.random()*1000000000).toString()
 
 asSlug = (name) ->
   name.replace(/\s/g, '-').replace(/[^A-Za-z0-9-]/g, '').toLowerCase()
@@ -68,6 +70,40 @@ startServer = (params) ->
     for k,v of params
       report["params.#{k}"] = Object.keys(params[k])
     res.send "<pre>#{JSON.stringify(report, null, '  ')}"
+
+  app.post '/plugin/rss/:slug/micropub', (req, res) ->
+    slug = req.params.slug
+    # get https://tokens.indieauth.com/token, accept: application/json, Authorication: req.headers['authorization']
+    # if res.code == 200
+    app.pagehandler.get slug, (e, page, status) ->
+      return res.e e if e
+      plugin = page.story?.findIndex (item) ->
+         item.type == 'rss'
+      return res.status(404).json({status: 'error', error: "No wiki-plugin-rss on this page.", slug}) unless plugin >= 0
+      # key = req.headers['x-api-key']
+      # auth = tokens?[slug]?[key] or tokens?['*']?[key]
+      # unless auth
+      #   return res.status(401).json({status: 'error', error: "Missing or invalid x-api-key in header"})
+      item = page.story[plugin]
+      item.resource = req.body
+      item.written = Date.now()
+      page.story.push
+        type: 'html'
+        id: id()
+        text: req.body.content
+      app.pagehandler.put slug, page, (err) ->
+        return res.e err if err
+        res.status(201).set('Location', '/'+slug+'.html')
+        res.send("Hello Aaron\n"+JSON.stringify(req.body))
+        res.json
+          status: 'ok'
+          written: item.written
+
+
+  app.get '/plugin/rss/:slug/micropub', (req, res) ->
+    slug = req.params.slug
+    res.set('Link', '<https://indieauth.com/auth>; rel="authorization_endpoint", <https://tokens.indieauth.com/token>; rel="token_endpoint", </plugin/rss/'+slug+'/micropub>; rel="micropub"')
+    res.status(200).send("""<a href="mailto:ward@c2.com" rel="me">""")
 
   app.get '/plugin/rss/:slug.xml', (req, res) ->
     slug = req.params.slug
